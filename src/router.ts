@@ -4,6 +4,8 @@ import multer from 'multer';
 
 import { listCategories } from './app/useCases/categories/listCategories';
 import { createCategory } from './app/useCases/categories/createCategory';
+import { updateCategory } from './app/useCases/categories/updateCategory';
+import { deleteCategory } from './app/useCases/categories/deleteCategory';
 import { listProducts } from './app/useCases/products/listProducts';
 import { createProduct } from './app/useCases/products/createProduct';
 import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
@@ -30,6 +32,12 @@ router.get('/categories', listCategories);
 
 // Create category
 router.post('/categories', createCategory);
+
+// Update category
+router.put('/categories/:categoryId', updateCategory);
+
+// Delete category
+router.delete('/categories/:categoryId', deleteCategory);
 
 // List products
 router.get('/products', listProducts);

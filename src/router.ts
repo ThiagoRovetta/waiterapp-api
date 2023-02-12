@@ -8,6 +8,7 @@ import { updateCategory } from './app/useCases/categories/updateCategory';
 import { deleteCategory } from './app/useCases/categories/deleteCategory';
 import { listProducts } from './app/useCases/products/listProducts';
 import { createProduct } from './app/useCases/products/createProduct';
+import { updateProduct } from './app/useCases/products/updateProduct';
 import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
 import { listOrders } from './app/useCases/orders/listOrders';
 import { createOrder } from './app/useCases/orders/createOrder';
@@ -44,6 +45,9 @@ router.get('/products', listProducts);
 
 // Create product
 router.post('/products', upload.single('image'), createProduct);
+
+// Update product
+router.put('/products/:productId', upload.single('image'), updateProduct);
 
 // Get products by category
 router.get('/categories/:categoryId/products', listProductsByCategory);

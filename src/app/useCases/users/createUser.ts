@@ -29,6 +29,12 @@ export async function createUser(req: Request, res: Response) {
       });
     }
 
+    if (!['WAITER', 'ADMIN'].includes(role)) {
+      return res.status(400).json({
+        error: 'Role should be one of these: WAITER, ADMIN'
+      });
+    }
+
     const hashedPassword = await hashPassword(password);
 
     const user = await User.create({

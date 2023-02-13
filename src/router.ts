@@ -18,6 +18,7 @@ import { cancelOrder } from './app/useCases/orders/cancelOrder';
 import { createUser } from './app/useCases/users/createUser';
 import { listUsers } from './app/useCases/users/listUsers';
 import { updateUser } from './app/useCases/users/updateUser';
+import { deleteUser } from './app/useCases/users/deleteUser';
 
 export const router = Router();
 
@@ -79,3 +80,6 @@ router.get('/users', listUsers);
 
 // Update user
 router.put('/users/:userId', updateUser);
+
+// Delete user
+router.delete('/users/:userId', deleteUser);

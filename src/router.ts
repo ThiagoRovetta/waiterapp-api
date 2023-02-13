@@ -16,6 +16,7 @@ import { createOrder } from './app/useCases/orders/createOrder';
 import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
 import { cancelOrder } from './app/useCases/orders/cancelOrder';
 import { createUser } from './app/useCases/users/createUser';
+import { listUsers } from './app/useCases/users/listUsers';
 
 export const router = Router();
 
@@ -71,3 +72,6 @@ router.delete('/orders/:orderId', cancelOrder);
 
 // Create user
 router.post('/users', createUser);
+
+// Create user
+router.get('/users', listUsers);

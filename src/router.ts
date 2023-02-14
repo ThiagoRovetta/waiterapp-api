@@ -19,6 +19,7 @@ import { createUser } from './app/useCases/users/createUser';
 import { listUsers } from './app/useCases/users/listUsers';
 import { updateUser } from './app/useCases/users/updateUser';
 import { deleteUser } from './app/useCases/users/deleteUser';
+import { ArchiveOrders } from './app/useCases/orders/archiveOrders';
 
 export const router = Router();
 
@@ -68,6 +69,9 @@ router.post('/orders', createOrder);
 
 // Change order status
 router.patch('/orders/:orderId', changeOrderStatus);
+
+// Archive order
+router.put('/orders/archive', ArchiveOrders);
 
 // Delete/cancel order
 router.delete('/orders/:orderId', cancelOrder);

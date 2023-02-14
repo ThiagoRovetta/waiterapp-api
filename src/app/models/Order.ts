@@ -28,5 +28,9 @@ export const Order = model('Order', new Schema({
         required: true,
       }
     }]
+  },
+  isArchived: {
+    type: Boolean,
+    default: false
   }
 }));

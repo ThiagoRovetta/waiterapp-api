@@ -14,18 +14,6 @@ export async function updateProduct(req: Request, res: Response) {
       ingredients
     } = req.body;
 
-    if (!name) {
-      return res.status(400).json({
-        error: 'Name is required'
-      });
-    }
-
-    if (!price) {
-      return res.status(400).json({
-        error: 'Price is required'
-      });
-    }
-
     await Product.findByIdAndUpdate(productId, {
       name,
       description,

@@ -20,6 +20,9 @@ import { listUsers } from './app/useCases/users/listUsers';
 import { updateUser } from './app/useCases/users/updateUser';
 import { deleteUser } from './app/useCases/users/deleteUser';
 import { ArchiveOrders } from './app/useCases/orders/archiveOrders';
+import { authUser } from './app/useCases/users/authUser';
+import { profile } from './app/useCases/users/profile';
+import { ensureAuthenticated } from './app/middlewares/ensureAuthenticated';
 
 export const router = Router();
 
@@ -35,55 +38,61 @@ const upload = multer({
 });
 
 // List categories
-router.get('/categories', listCategories);
+router.get('/categories', ensureAuthenticated, listCategories);
 
 // Create category
-router.post('/categories', createCategory);
+router.post('/categories', ensureAuthenticated, createCategory);
 
 // Update category
-router.put('/categories/:categoryId', updateCategory);
+router.put('/categories/:categoryId', ensureAuthenticated, updateCategory);
 
 // Delete category
-router.delete('/categories/:categoryId', deleteCategory);
+router.delete('/categories/:categoryId', ensureAuthenticated, deleteCategory);
 
 // List products
-router.get('/products', listProducts);
+router.get('/products', ensureAuthenticated, listProducts);
 
 // Create product
-router.post('/products', upload.single('image'), createProduct);
+router.post('/products', ensureAuthenticated, upload.single('image'), createProduct);
 
 // Update product
-router.put('/products/:productId', upload.single('image'), updateProduct);
+router.put('/products/:productId', ensureAuthenticated,  upload.single('image'), updateProduct);
 
 // Delete product
-router.delete('/products/:productId', deleteProduct);
+router.delete('/products/:productId', ensureAuthenticated, deleteProduct);
 
 // Get products by category
-router.get('/categories/:categoryId/products', listProductsByCategory);
+router.get('/categories/:categoryId/products', ensureAuthenticated, listProductsByCategory);
 
 // List orders
-router.get('/orders', listOrders);
+router.get('/orders', ensureAuthenticated, listOrders);
 
 // Create order
-router.post('/orders', createOrder);
+router.post('/orders', ensureAuthenticated, createOrder);
 
 // Change order status
-router.patch('/orders/:orderId', changeOrderStatus);
+router.patch('/orders/:orderId', ensureAuthenticated, changeOrderStatus);
 
 // Archive order
-router.put('/orders/archive', ArchiveOrders);
+router.put('/orders/archive', ensureAuthenticated, ArchiveOrders);
 
 // Delete/cancel order
-router.delete('/orders/:orderId', cancelOrder);
+router.delete('/orders/:orderId', ensureAuthenticated, cancelOrder);
 
 // Create user
-router.post('/users', createUser);
+router.post('/users', ensureAuthenticated, createUser);
 
 // Create user
-router.get('/users', listUsers);
+router.get('/users', ensureAuthenticated, listUsers);
 
 // Update user
-router.put('/users/:userId', updateUser);
+router.put('/users/:userId', ensureAuthenticated, updateUser);
 
 // Delete user
-router.delete('/users/:userId', deleteUser);
+router.delete('/users/:userId', ensureAuthenticated, deleteUser);
+
+// Auth user
+router.post('/auth', authUser);
+
+// Profile
+router.get('/profile', ensureAuthenticated, profile);

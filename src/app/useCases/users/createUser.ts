@@ -20,7 +20,7 @@ export async function createUser(req: Request, res: Response) {
     }
 
     const emailAlreadyExists = await User.findOne({
-      email: email,
+      email,
     });
 
     if (emailAlreadyExists) {

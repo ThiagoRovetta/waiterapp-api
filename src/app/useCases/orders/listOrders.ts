@@ -4,10 +4,16 @@ import { Order } from '../../models/Order';
 
 export async function listOrders(req: Request, res: Response) {
   try {
-    const { archived } = req.params;
+    const { archived } = req.query;
+
+    let isArchived = false;
+
+    if (archived === 'true') {
+      isArchived = true;
+    }
 
     const orders = await Order.find()
-      .where('isArchived').equals(archived)
+      .where('isArchived').equals(isArchived)
       .sort({ createdAt: 1 })
       .populate('products.product');
 

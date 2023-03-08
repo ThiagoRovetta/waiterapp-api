@@ -41,7 +41,9 @@ export async function updateUser(req: Request, res: Response) {
 
     await User.findByIdAndUpdate(userId, updateObject);
 
-    res.sendStatus(204);
+    const user = await User.findById(userId);
+
+    res.status(200).json(user);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

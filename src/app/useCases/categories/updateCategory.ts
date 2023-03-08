@@ -15,7 +15,9 @@ export async function updateCategory(req: Request, res: Response) {
 
     await Category.findByIdAndUpdate(categoryId, { icon, name });
 
-    res.sendStatus(204);
+    const category = await Category.findById(categoryId);
+
+    res.status(200).json(category);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

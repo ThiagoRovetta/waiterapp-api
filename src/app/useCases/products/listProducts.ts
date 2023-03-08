@@ -4,7 +4,8 @@ import { Product } from '../../models/Product';
 
 export async function listProducts(req: Request, res: Response) {
   try {
-    const products = await Product.find();
+    const products = await Product.find()
+      .populate('category');
 
     res.json(products);
   } catch (error) {

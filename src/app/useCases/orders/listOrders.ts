@@ -15,7 +15,17 @@ export async function listOrders(req: Request, res: Response) {
     const orders = await Order.find()
       .where('isArchived').equals(isArchived)
       .sort({ createdAt: 1 })
-      .populate('products.product');
+      .populate([
+        {
+          path: 'products.product',
+          model: 'Product',
+          select: 'name description imagePath price ingredients category',
+          populate: {
+            path: 'category',
+            model: 'Category',
+          }
+        }
+      ]);
 
     res.json(orders);
   } catch (error) {

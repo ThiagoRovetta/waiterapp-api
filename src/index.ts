@@ -13,7 +13,7 @@ const app = express();
 const server = http.createServer(app);
 export const io = new Server(server);
 
-mongoose.connect('mongodb://localhost:27017')
+mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost:27017')
   .then((() => {
     const port = 3001;
 
